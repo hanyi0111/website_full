@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>吕怡晗 - 生活中的我</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #fff5f5 0%, #fff0e6 100%);
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 3rem;
+            height: 70px;
+        }
+
+        nav .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffa502 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #34495e;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: #ff6b6b;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffa502 100%);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        #hero {
+            margin-top: 120px;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        #hero h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffa502 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        #hero .subtitle {
+            font-size: 1.3rem;
+            color: #7f8c8d;
+        }
+
+        section {
+            margin: 4rem auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.08);
+            padding: 3rem;
+        }
+
+        section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2.5rem;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+        }
+
+        section h2::before {
+            content: '';
+            width: 8px;
+            height: 35px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffa502 100%);
+            border-radius: 4px;
+            margin-right: 1rem;
+        }
+
+        .life-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .life-card {
+            background: linear-gradient(135deg, #fff5f5 0%, #fff9f0 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid #ffe0e0;
+            transition: all 0.3s ease;
+        }
+
+        .life-card:hover {
+            transform: translateY(-5px);
+            border-color: #ff6b6b;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.15);
+        }
+
+        .life-card h3 {
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .life-card p {
+            color: #34495e;
+            line-height: 1.8;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 0;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 968px) {
+            nav {
+                flex-direction: column;
+                padding: 1rem;
+                height: auto;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .life-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">生活中的我</div>
+        <ul>
+            <li><a href="index.html">← 返回主页</a></li>
+        </ul>
+    </nav>
+
+    <section id="hero" class="container">
+        <h1>🌟 生活中的我</h1>
+        <p class="subtitle">工作之外，我也有丰富的生活～</p>
+    </section>
+
+    <section class="container">
+        <h2>我的兴趣爱好</h2>
+        <div class="life-grid">
+            <div class="life-card">
+                <h3>📚 阅读</h3>
+                <p>喜欢读产品思维、AI技术相关的书籍，也喜欢看小说放松心情。</p>
+            </div>
+            <div class="life-card">
+                <h3>🏃 运动</h3>
+                <p>坚持跑步、瑜伽，保持健康的身体和积极的心态。</p>
+            </div>
+            <div class="life-card">
+                <h3>🎨 创意</h3>
+                <p>喜欢用AI工具做创意设计，探索艺术与技术的结合。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2>生活态度</h2>
+        <div style="text-align: center; padding: 2rem;">
+            <p style="font-size: 1.3rem; line-height: 2; color: #34495e;">
+                认真工作，用心生活<br>
+                保持好奇，持续成长<br>
+                做一个温暖而有力量的人 ✨
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 吕怡晗 | 生活中的我</p>
+        <p>本网站由 AI 辅助构建（迭代版）</p>
+    </footer>
+</body>
+</html>

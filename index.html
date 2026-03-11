@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>吕怡晗 - AI产品经理</title>
     <style>
-        /* 全局样式 */
         * {
             margin: 0;
             padding: 0;
@@ -13,571 +12,865 @@
         }
 
         body {
-            font-family: 'Microsoft YaHei', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f5f5f5;
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
         }
 
-        /* 导航栏样式 */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background-color: #fff;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
             z-index: 1000;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 2rem;
+            padding: 0 3rem;
+            height: 70px;
         }
 
         nav .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #2c3e50;
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         nav ul {
             display: flex;
-            justify-content: flex-end;
             list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        nav ul li {
-            margin: 0 1rem;
+            gap: 2rem;
         }
 
         nav ul li a {
             text-decoration: none;
-            color: #333;
+            color: #34495e;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
             padding: 0.5rem 0;
-            border-bottom: 2px solid transparent;
+            position: relative;
         }
 
         nav ul li a:hover {
-            color: #007bff;
-            border-bottom-color: #007bff;
+            color: #667eea;
         }
 
-        /* 通用容器样式 */
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 0 2rem;
         }
 
-        /* Hero区样式 */
         #home {
-            margin-top: 6rem;
+            margin-top: 100px;
             display: flex;
             align-items: center;
-            justify-content: space-around;
-            padding: 4rem 0;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            justify-content: space-between;
+            padding: 4rem 3rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
         }
 
         #home .hero-content {
-            text-align: left;
+            flex: 1;
             max-width: 600px;
         }
 
         #home .hero-image {
-            width: 300px;
-            height: 300px;
-            background-color: #f8f9fa;
-            border-radius: 50%;
+            width: 96px;
+            height: 134px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #666;
-            font-size: 1.2rem;
-            border: 5px solid #e9ecef;
+            color: #667eea;
+            font-size: 0.7rem;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+            flex-shrink: 0;
+            margin-left: 3rem;
+            border: 2px dashed #667eea;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        #home .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         #home h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 1rem;
-            color: #2c3e50;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        #home .subtitle {
+            font-size: 1.3rem;
+            color: #7f8c8d;
+            margin-bottom: 1.5rem;
+        }
+
+        #home .contact-info {
+            font-size: 1rem;
+            color: #34495e;
+            margin-bottom: 2rem;
+        }
+
+        #home .contact-info p {
+            margin-bottom: 0.5rem;
         }
 
         #home .tags {
-            font-size: 1.2rem;
-            color: #666;
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 0.8rem;
             margin-bottom: 2rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        #home .tag {
+            padding: 0.6rem 1.4rem;
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        #home .tag:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
         }
 
         #home .btn {
             display: inline-block;
-            padding: 0.8rem 2rem;
-            background-color: #007bff;
-            color: #fff;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
             text-decoration: none;
-            border-radius: 5px;
-            font-weight: 500;
-            transition: background-color 0.3s ease;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
         }
 
         #home .btn:hover {
-            background-color: #0056b3;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.5);
         }
 
-        /* 通用模块样式 */
         section {
-            margin: 4rem 0;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            padding: 2.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            margin: 4rem auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.08);
+            padding: 3rem;
         }
 
         section h2 {
             font-size: 2.2rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             color: #2c3e50;
-            border-bottom: 3px solid #007bff;
-            padding-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
             font-weight: 700;
         }
 
-        /* 关于我模块样式 */
-        #about .info-item {
+        section h2::before {
+            content: '';
+            width: 8px;
+            height: 35px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 4px;
+            margin-right: 1rem;
+        }
+
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 2rem;
+        }
+
+        .education-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        .education-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
             margin-bottom: 1.5rem;
         }
 
-        #about .info-item h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
+        .school-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 2px dashed #667eea;
+            color: #667eea;
+            font-size: 0.9rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .school-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .education-card h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .education-card .period {
+            color: #7f8c8d;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .education-card .gpa {
+            background: #667eea;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .education-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .education-card li {
+            padding: 0.5rem 0;
             color: #34495e;
+            padding-left: 1.5rem;
+            position: relative;
         }
 
-        #about .skills {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
+        .education-card li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
         }
 
-        #about .skill-category {
-            background-color: #f8f9fa;
-            padding: 1rem;
-            border-radius: 5px;
-        }
-
-        #about .skill-category h4 {
-            margin-bottom: 0.8rem;
-            color: #007bff;
-        }
-
-        /* 核心实习模块样式 */
-        #internships .internship-grid {
+        .internship-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
             gap: 2rem;
         }
 
-        #internships .internship-card {
-            background-color: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 5px;
-            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+        .internship-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
         }
 
-        #internships .internship-card h3 {
-            margin-bottom: 0.8rem;
+        .internship-card:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+        }
+
+        .internship-card h3 {
             color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
         }
 
-        #internships .internship-card .period {
-            color: #666;
-            margin-bottom: 1rem;
+        .internship-card .company {
+            color: #667eea;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
         }
 
-        /* 项目与详情模块样式 */
-        #projects .project-overview {
-            margin-bottom: 3rem;
+        .internship-card .period {
+            color: #7f8c8d;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
         }
 
-        #projects .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2rem;
-            margin-top: 1.5rem;
-        }
-
-        #projects .project-card {
-            background-color: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 5px;
-            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        #projects .project-details .accordion {
-            margin-bottom: 1rem;
-        }
-
-        #projects .project-details .accordion-header {
-            background-color: #007bff;
-            color: #fff;
-            padding: 1rem;
-            border-radius: 5px;
-            cursor: pointer;
+        .internship-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
-        #projects .project-details .accordion-content {
-            background-color: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 0 0 5px 5px;
-            display: none;
+        .company-logo {
+            width: 70px;
+            height: 70px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 2px dashed #667eea;
+            color: #667eea;
+            font-size: 0.85rem;
+            font-weight: 600;
+            flex-shrink: 0;
         }
 
-        #projects .project-details .accordion-content.active {
-            display: block;
+        .company-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 12px;
         }
 
-        /* AI产品思考模块样式 */
-        #thinking .thought-item {
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background-color: #f8f9fa;
+        .internship-card .achievement {
+            background: linear-gradient(135deg, #fff3e0 0%, #fff8e1 100%);
+            color: #e65100;
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #ff9800;
+        }
+
+        .gpa {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            color: #0d47a1;
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+            border-left: 3px solid #2196f3;
+        }
+
+        .preview-btn {
+            display: inline-block;
+            padding: 0.35rem 0.8rem;
+            background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+            color: white;
+            text-decoration: none;
             border-radius: 5px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-left: 0.6rem;
+            transition: all 0.3s ease;
+            white-space: nowrap;
         }
 
-        #thinking .thought-item h3 {
+        .preview-btn:hover {
+            background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(33, 150, 243, 0.4);
+        }
+
+        .internship-card h4 {
+            color: #34495e;
+            margin: 1.2rem 0 0.8rem 0;
+            font-size: 1.1rem;
+        }
+
+        .internship-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .internship-card li {
+            padding: 0.6rem 0;
+            color: #34495e;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.7;
+        }
+
+        .internship-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+        }
+
+        .project-card h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .project-card .role {
+            color: #667eea;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card .period {
+            color: #7f8c8d;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-card .result {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 0.8rem 1.2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-card h4 {
+            color: #34495e;
+            margin: 1rem 0 0.6rem 0;
+        }
+
+        .project-card p {
+            color: #34495e;
+            line-height: 1.8;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .skill-category h4 {
+            color: #667eea;
+            margin-bottom: 1rem;
             font-size: 1.2rem;
-            margin-bottom: 0.8rem;
-            color: #007bff;
+            font-weight: 700;
         }
 
-        /* 联系方式模块样式 */
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .skill-tag {
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #34495e;
+            border: 1px solid #dee2e6;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .self-intro {
+            background: linear-gradient(135deg, #667eea10 0%, #764ba210 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+            margin-bottom: 2rem;
+        }
+
+        .self-intro p {
+            color: #34495e;
+            line-height: 2;
+            font-size: 1.05rem;
+        }
+
         #contact {
             text-align: center;
         }
 
-        #contact .contact-info {
+        #contact .contact-detail {
             margin-bottom: 2rem;
         }
 
-        #contact .contact-info p {
+        #contact .contact-detail p {
             margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        #contact .btn-group {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        #contact .btn {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 500;
-            transition: background-color 0.3s ease;
-        }
-
-        #contact .btn:hover {
-            background-color: #0056b3;
-        }
-
-        #contact .qr-code {
-            width: 200px;
-            height: 200px;
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-            color: #666;
             font-size: 1.2rem;
-            border: 5px solid #e9ecef;
+            color: #34495e;
         }
 
-        /* 页脚样式 */
+        #contact .contact-detail strong {
+            color: #667eea;
+        }
+
         footer {
-            background-color: #2c3e50;
-            color: #fff;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
             text-align: center;
-            padding: 2rem 0;
+            padding: 2.5rem 0;
             margin-top: 4rem;
         }
 
         footer p {
             margin-bottom: 0.5rem;
+            opacity: 0.9;
         }
 
-        /* 响应式设计 */
-        @media (max-width: 768px) {
+        @media (max-width: 968px) {
             nav {
                 flex-direction: column;
                 padding: 1rem;
-            }
-
-            nav .logo {
-                margin-bottom: 1rem;
+                height: auto;
             }
 
             nav ul {
+                margin-top: 1rem;
                 flex-wrap: wrap;
                 justify-content: center;
-            }
-
-            nav ul li {
-                margin: 0.5rem;
+                gap: 1rem;
             }
 
             #home {
                 flex-direction: column;
                 text-align: center;
+                padding: 2rem;
             }
 
-            #home .hero-content {
-                text-align: center;
-                margin-bottom: 2rem;
+            #home .hero-image {
+                margin-left: 0;
+                margin-top: 2rem;
             }
 
-            #home h1 {
-                font-size: 2rem;
-            }
-
-            #internships .internship-grid,
-            #projects .project-grid {
+            .education-grid,
+            .internship-grid,
+            .project-grid,
+            .skills-grid {
                 grid-template-columns: 1fr;
-            }
-
-            #contact .btn-group {
-                flex-direction: column;
-                align-items: center;
             }
         }
     </style>
 </head>
 <body>
-    <!-- 顶部导航栏 -->
     <nav>
-        <div class="logo">Yihan L.</div>
+        <div class="logo">个人网站</div>
         <ul>
-            <li><a href="#home">HOME</a></li>
+            <li><a href="#home">首页</a></li>
             <li><a href="#about">关于我</a></li>
-            <li><a href="#internships">核心实习</a></li>
-            <li><a href="#projects">项目与详情</a></li>
-            <li><a href="#thinking">AI产品思考</a></li>
+            <li><a href="#education">教育背景</a></li>
+            <li><a href="#internships">实习经历</a></li>
+            <li><a href="#projects">项目经历</a></li>
             <li><a href="#contact">联系方式</a></li>
         </ul>
     </nav>
 
-    <!-- 首页首屏-Hero区 -->
     <section id="home" class="container">
         <div class="hero-content">
-            <h1>吕怡晗 | AI产品经理（校招）</h1>
-            <div class="tags">核心标签：大模型产品迭代 / AI数据产品设计 / 文本挖掘</div>
-            <a href="#internships" class="btn">[ 查看核心履历 ] 👉</a>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <h1 style="margin-bottom: 0;">吕怡晗</h1>
+                <a href="life.html" style="display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.4rem 0.9rem; background: linear-gradient(135deg, #ff6b6b 0%, #ffa502 100%); color: white; text-decoration: none; border-radius: 20px; font-weight: 500; font-size: 0.9rem; transition: all 0.3s ease; box-shadow: 0 3px 10px rgba(255, 107, 107, 0.3);">
+                    👇 点击查看生活中的我
+                </a>
+            </div>
+            <p class="subtitle">🎯 AI产品经理</p>
+            <div class="contact-info">
+                <p>📱 手机：<strong>13072660129</strong></p>
+                <p>📧 邮箱：<strong>2667270650@qq.com</strong></p>
+            </div>
+            <div class="tags">
+                <span class="tag">大模型产品</span>
+                <span class="tag">Prompt工程</span>
+                <span class="tag">需求分析</span>
+                <span class="tag">数据处理</span>
+            </div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <a href="#internships" class="btn">查看核心履历 →</a>
+                <a href="简历.pdf" download class="btn" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%);">📄 下载简历</a>
+            </div>
         </div>
         <div class="hero-image">
-            <span>个人照片占位符</span>
+            <img src="图片文件/照片.jpg" alt="个人照片" style="display: block;">
         </div>
     </section>
 
-    <!-- 关于我-个人简介模块 -->
     <section id="about" class="container">
         <h2>关于我</h2>
-        <div class="info-item">
-            <h3>基础信息</h3>
-            <p>姓名：吕怡晗 | 学历：桂电硕士管科+河医大本科信管 | 求职方向：AI产品经理 | 邮箱：lvyihan@example.com</p>
+        <div class="self-intro">
+            <p>
+                <strong>学习方面</strong>：专业知识及科研能力扎实，研究方向为大模型输出优化研究，专注于AI大模型输出优化研究。<br>
+                <strong>工作方面</strong>：待人真诚，有良好的沟通能力；善于在小团队中挖掘和发现问题、处理问题，有较强的分析能力。
+            </p>
         </div>
-        <div class="info-item">
-            <h3>核心能力</h3>
-            <p>硕士深耕大模型输出优化，字节/美的双实习背景，具备AI+产品复合能力</p>
-        </div>
-        <div class="info-item">
-            <h3>能力标签</h3>
-            <p>大模型 / Prompt工程 / 需求分析 / 原型设计 / 跨团队协同 / PRD撰写</p>
-        </div>
-        <div class="skills">
+        <h3 style="margin-bottom: 1.5rem; color: #2c3e50;">技能证书</h3>
+        <div class="skills-grid">
             <div class="skill-category">
-                <h4>产品能力</h4>
-                <p>需求分析✅精通、原型设计✅熟练、PRD撰写✅熟练、跨团队协同✅精通</p>
+                <h4>📊 数据分析</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">SPSS</span>
+                    <span class="skill-tag">MATLAB</span>
+                    <span class="skill-tag">Neo4j</span>
+                    <span class="skill-tag">MySQL</span>
+                    <span class="skill-tag">Navicat</span>
+                </div>
             </div>
             <div class="skill-category">
-                <h4>AI技术理解</h4>
-                <p>大模型迭代✅精通、RAG/CoT✅熟练、文本挖掘✅熟练、Prompt工程✅精通</p>
+                <h4>🎨 原型设计</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">Figma</span>
+                    <span class="skill-tag">Xmind</span>
+                    <span class="skill-tag">GemDesign</span>
+                </div>
             </div>
             <div class="skill-category">
-                <h4>工具技能</h4>
-                <p>Python✅精通、Figma✅熟练、SPSS✅熟练、SQL✅了解</p>
+                <h4>📜 语言证书</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">英语 CET-6<a href="图片文件/英语六级证书.pdf" target="_blank" class="preview-btn">预览</a></span>
+                    <span class="skill-tag">计算机二级<a href="图片文件/计算机二级证书.pdf" target="_blank" class="preview-btn">预览</a></span>
+                    <span class="skill-tag">普通话二级甲等<a href="图片文件/普通话证书.pdf" target="_blank" class="preview-btn">预览</a></span>
+                </div>
             </div>
             <div class="skill-category">
-                <h4>通用能力</h4>
-                <p>数据分析✅精通、问题解决✅熟练、快速迭代✅精通</p>
+                <h4>🤖 AI产品能力</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">大模型迭代</span>
+                    <span class="skill-tag">Prompt工程</span>
+                    <span class="skill-tag">RAG技术</span>
+                    <span class="skill-tag">CoT思维链</span>
+                    <span class="skill-tag">文本挖掘</span>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- 核心实习模块 -->
+    <section id="education" class="container">
+        <h2>教育背景</h2>
+        <div class="education-grid">
+            <div class="education-card">
+                <div class="education-header">
+                    <div class="school-logo">
+                        <img src="图片文件/桂电校徽.jpg" alt="桂林电子科技大学校徽" onerror="this.style.display='none'; this.parentElement.innerHTML='<span>🏫 桂电校徽占位符</span>';">
+                    </div>
+                    <div>
+                        <h3 style="margin-bottom: 0.5rem;">🎓 桂林电子科技大学</h3>
+                        <p class="period" style="margin-bottom: 0;">2023.09 -- 2026.06</p>
+                    </div>
+                </div>
+                <p><strong>学院</strong>：商学院</p>
+                <p><strong>专业</strong>：管理科学与工程（硕士）</p>
+                <span class="gpa">GPA 3.3/5（专业前10%）</span>
+                <h4 style="margin-top: 1rem; color: #2c3e50;">主修课程</h4>
+                <ul>
+                    <li>高级运筹学</li>
+                    <li>高级统计学</li>
+                    <li>系统工程</li>
+                    <li>决策理论与方法</li>
+                </ul>
+                <h4 style="margin-top: 1rem; color: #2c3e50;">主要奖项</h4>
+                <ul>
+                    <li>蓝桥杯AIGC图片创意设计大赛全国三等奖<a href="图片文件/蓝桥杯证书.jpg" target="_blank" class="preview-btn">预览</a></li>
+                    <li>华为ICT大赛省赛二等奖</li>
+                </ul>
+            </div>
+            <div class="education-card">
+                <div class="education-header">
+                    <div class="school-logo">
+                        <img src="图片文件/河医大校徽.jpg" alt="河南医药大学校徽" onerror="this.style.display='none'; this.parentElement.innerHTML='<span>🏫 河医大校徽占位符</span>';">
+                    </div>
+                    <div>
+                        <h3 style="margin-bottom: 0.5rem;">🎓 河南医药大学</h3>
+                        <p class="period" style="margin-bottom: 0;">2019.09 -- 2023.06</p>
+                    </div>
+                </div>
+                <p><strong>学院</strong>：管理学院</p>
+                <p><strong>专业</strong>：信息管理与信息系统（本科）</p>
+                <span class="gpa">GPA 3.8/5（专业排名2/65）</span>
+                <h4 style="margin-top: 1rem; color: #2c3e50;">主要奖项</h4>
+                <ul>
+                    <li>优秀毕业生<a href="图片文件/优秀毕业生证书.jpg" target="_blank" class="preview-btn">预览</a></li>
+                    <li>二等奖学金<a href="图片文件/奖学金证书.jpg" target="_blank" class="preview-btn">预览</a></li>
+                    <li>优秀团员<a href="图片文件/优秀团员证书.jpg" target="_blank" class="preview-btn">预览</a></li>
+                    <li>优秀志愿者</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
     <section id="internships" class="container">
-        <h2>核心实习</h2>
+        <h2>实习经历</h2>
         <div class="internship-grid">
             <div class="internship-card">
-                <h3>字节跳动 | AI数据技术（豆包超能模式）</h3>
-                <div class="period">2025.08-2025.10</div>
-                <p><strong>核心成果：</strong>SP策略设计，模型格式遵循度95%</p>
-                <p><strong>核心职责：</strong>大模型产品迭代/自动化评测流程设计</p>
-                <p><strong>AI工具：</strong>Prompt工程 / VLM技术</p>
-                <p><strong>核心技能应用：</strong>大模型迭代、Prompt工程（精通）</p>
+                <div class="internship-header">
+                    <div class="company-logo">
+                        <img src="图片文件/字节logo.jpg" alt="字节跳动logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<span>🏢 字节logo占位符</span>';">
+                    </div>
+                    <div>
+                        <p class="company" style="margin-bottom: 0.3rem;">字节跳动</p>
+                        <h3 style="margin-bottom: 0.3rem;">AI数据技术实习生</h3>
+                        <p class="period" style="margin-bottom: 0;">2025.08 -- 2025.10</p>
+                    </div>
+                </div>
+                <div class="achievement">
+                    🏆 核心成果：SP策略设计，模型格式遵循度提升至95%
+                </div>
+                <h4>项目背景</h4>
+                <p>豆包"超能模式"核心功能全生命周期开发，覆盖大模型生产-评测-质检全流程，前期深度参与大模型预训练与后训练（有监督微调），后期独立主导模型自动化评测与修复体系搭建，为"超能模式"顺利上线提供核心技术支撑。</p>
+                <h4>核心工作</h4>
+                <ul>
+                    <li><strong>AI训练</strong>：深度参与豆包大模型"超能模式"核心功能迭代，独立设计搭建提示词（SP）策略，输出线上模板（SFT）数据。经模型验证，模型生成的格式遵循度提升至95%，有效减少后期修正成本。同步强化生成内容准确性编辑，直接支撑功能上线及效果验证。</li>
+                    <li><strong>流程改进</strong>：主导SP策略的严格质量提升，结合视觉语言模型（VLM）技术，自动化生成内容准确性编辑（checklist），替代传统人工SP评测环节，实现SP迭代与质检流程的自动化、可复用化，评测效率提升30%以上。</li>
+                    <li><strong>项目协同</strong>：协同算法、产品团队，主动推动方案效率优化（如自行优化提示词链路等），确保高质量数据按时交付，积累跨团队经验。</li>
+                </ul>
             </div>
             <div class="internship-card">
-                <h3>美的集团 | 产品经理（VOC分析）</h3>
-                <div class="period">2025.04-2025.07</div>
-                <p><strong>核心成果：</strong>VOC分析，需求落地率85%</p>
-                <p><strong>核心职责：</strong>用户需求分析/产品原型设计</p>
-                <p><strong>AI工具：</strong>Python / Figma / Xmind</p>
-                <p><strong>核心技能应用：</strong>需求分析、原型设计（精通/熟练）</p>
+                <div class="internship-header">
+                    <div class="company-logo">
+                        <img src="图片文件/美的logo.jpg" alt="美的集团logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<span>🏢 美的logo占位符</span>';">
+                    </div>
+                    <div>
+                        <p class="company" style="margin-bottom: 0.3rem;">美的集团</p>
+                        <h3 style="margin-bottom: 0.3rem;">产品经理实习生</h3>
+                        <p class="period" style="margin-bottom: 0;">2025.04 -- 2025.07</p>
+                    </div>
+                </div>
+                <div class="achievement">
+                    🏆 核心成果：VOC分析需求落地，需求落地率85%+
+                </div>
+                <h4>项目背景</h4>
+                <p>用户观点（VOC）分析项目旨在通过挖掘用户反馈数据，提取产品痛点问题，优化产品质量检测流程。该项目面临的核心挑战是：提取到的用户观点数据存在一些噪声数据，和观点对应的四级分类不准确等问题，影响了从用户观点提取产品痛点的准确性。</p>
+                <h4>核心工作</h4>
+                <ul>
+                    <li><strong>数据处理</strong>：负责用户观点（VOC）原始数据的标准化清洗与预处理，设计融合规则引擎与统计模型的异常值检测流程，构建高质量文本数据集。熟练运用Python（NumPy、Pandas）进行数据处理与分析，结合VLOOKUP等函数实现多源数据对齐与整合。</li>
+                    <li><strong>需求分析</strong>：参与VOC（客户之声）系统功能升级的需求调研与分析，梳理用户核心诉求，输出需求分析报告PRD。</li>
+                    <li><strong>原型设计</strong>：基于Figma、Xmind完成前端交互原型设计，覆盖数据展示、标签筛选及结果导出等功能模块，获得开发团队认可。</li>
+                    <li><strong>项目协同</strong>：参与与VOC平台系统开发、某学校PayPal实验课平台开发等项目，协调客户、技术、产品及业务多方团队，制定项目排期与关键交付节点，识别潜在风险并推动闭环解决，保障项目按期上线，显著提升跨部门协作效率。</li>
+                </ul>
             </div>
         </div>
     </section>
 
-    <!-- 项目与详情模块 -->
     <section id="projects" class="container">
-        <h2>项目与详情</h2>
-        <div class="project-overview">
-            <h3>一、核心项目概览</h3>
-            <div class="project-grid">
-                <div class="project-card">
-                    <h4>大模型药品说明书摘要生成（改进RAG）</h4>
-                    <p>项目负责人 | 2024.03-2024.12</p>
-                    <p><strong>核心成果：</strong>多模型摘要质量提升6%-11%</p>
-                    <p><strong>核心技能应用：</strong>RAG/CoT、文本挖掘（熟练）</p>
-                </div>
-                <div class="project-card">
-                    <h4>大屏动态文字实时检索</h4>
-                    <p>核心成员 | 2022.06-2023.06</p>
-                    <p><strong>核心成果：</strong>论文发表/省级验收</p>
-                    <p><strong>核心技能应用：</strong>Python、数据分析（熟练）</p>
-                </div>
+        <h2>项目经历</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <h3>基于改进RAG的大模型药品说明书摘要生成研究</h3>
+                <p class="role">项目负责人</p>
+                <p class="period">2024.03 -- 2024.12</p>
+                <div class="result">
+                    📝 研究成果：多模型摘要质量提升6%-11%</div>
+                <h4>研究内容</h4>
+                <p>针对中药说明书专业性强、结构复杂的特点，探索基于大语言模型（LLM）的领域自适应摘要方法，提出自适应提示模型（IR-Med-Sum），融合思维链（CoT）与RAG技术，提升大模型在医学文本摘要中的生成能力。</p>
+                <h4>研究方法</h4>
+                <p>设计多维度提示模板，引入思维链"拆分→功效→用法→禁忌"逻辑解析文本，在少量标注数据下提升输出质量。</p>
+                <h4>研究结果</h4>
+                <p>基于原始模型，在摘要模型ROUGE-1、ROUGE-2和ROUGE-L等指标上测试，TCO-MedSum生成的提示模板在语义相似度上优于原始模型，摘要质量分别提升11.34%、10.95%和6.27%。</p>
             </div>
-        </div>
-        <div class="project-details">
-            <h3>二、项目详情解析（折叠面板）</h3>
-            <div class="accordion">
-                <div class="accordion-header">
-                    <span>字节·豆包超能模式 ▶</span>
-                    <span>【点击展开/收起】</span>
+            <div class="project-card">
+                <h3>基于关键字的大屏动态文字实时检索系统（省级）</h3>
+                <p class="role">项目核心成员</p>
+                <p class="period">2022.06 -- 2023.06</p>
+                <div class="result">
+                    📝 项目成果：论文发表+省级验收<a href="图片文件/结项证书.jpg" target="_blank" class="preview-btn">结项证书</a>
                 </div>
-                <div class="accordion-content">
-                    <p><strong>项目背景：</strong>豆包大模型输出质量优化，提升用户体验</p>
-                    <p><strong>我的角色：</strong>AI数据技术实习生，负责SP策略设计</p>
-                    <p><strong>核心工作：</strong>制定SP策略/设计自动化评测流程/验证模型效果</p>
-                    <p><strong>产品成果：</strong>模型格式遵循度95%，评测效率提升30%</p>
-                    <p><strong>技术栈：</strong>Prompt工程 / VLM技术 / 大模型迭代（技能匹配：精通）</p>
-                </div>
-            </div>
-            <div class="accordion">
-                <div class="accordion-header">
-                    <span>美的·VOC分析项目 ▶</span>
-                    <span>【点击展开/收起】</span>
-                </div>
-                <div class="accordion-content">
-                    <p><strong>项目背景：</strong>用户观点分析，支撑产品迭代决策</p>
-                    <p><strong>我的角色：</strong>产品经理实习生，负责需求分析与原型设计</p>
-                    <p><strong>核心工作：</strong>梳理用户需求/设计产品原型/跨团队协同落地</p>
-                    <p><strong>产品成果：</strong>需求落地率85%，支撑3个产品迭代版本</p>
-                    <p><strong>技术栈：</strong>Python / Figma / Xmind / 数据分析（技能匹配：精通/熟练）</p>
-                </div>
-            </div>
-            <div class="accordion">
-                <div class="accordion-header">
-                    <span>硕士·RAG大模型项目 ▶</span>
-                    <span>【点击展开/收起】</span>
-                </div>
-                <div class="accordion-content">
-                    <p><strong>项目背景：</strong>药品说明书摘要生成，提升医疗文本处理效率</p>
-                    <p><strong>我的角色：</strong>项目负责人，统筹设计与落地</p>
-                    <p><strong>核心工作：</strong>改进RAG框架/多模型测试/效果验证</p>
-                    <p><strong>产品成果：</strong>摘要质量提升6%-11%，小样本场景适配性提升</p>
-                    <p><strong>技术栈：</strong>大模型 / RAG / CoT / 文本挖掘（技能匹配：精通/熟练）</p>
-                </div>
+                <h4>主要工作</h4>
+                <p>主要负责设计项目研究具体技术路线（包含信息输入模块、视频文字处理模块、目标文本输出模块等）。</p>
+                <h4>项目成果</h4>
+                <p>发表论文《基于关键字的大屏动态文字识别软件设计研究》刊载于《电子技术与软件工程》杂志。</p>
             </div>
         </div>
     </section>
 
-    <!-- AI产品思考模块 -->
-    <section id="thinking" class="container">
-        <h2>AI产品思考</h2>
-        <div class="thought-item">
-            <h3>【核心观点加粗】大模型产品落地核心是降本提效，自动化评测比人工提效30%+</h3>
-            <p>（结合字节实习：通过SP策略和自动化流程，减少人工介入，提升大模型输出评测效率）</p>
-        </div>
-        <div class="thought-item">
-            <h3>【核心观点加粗】AI数据产品的基础是高质量数据，数据清洗是产品优化前提</h3>
-            <p>（结合美的VOC项目：清洗异常数据后，用户观点分析准确率提升15%，支撑产品决策）</p>
-        </div>
-        <div class="thought-item">
-            <h3>【核心观点加粗】大模型垂直落地需融合领域知识+Prompt工程，小样本提效关键</h3>
-            <p>（结合硕士RAG项目：医疗领域说明书摘要，通过领域Prompt优化，小样本下效果提升）</p>
-        </div>
-    </section>
-
-    <!-- 联系方式模块 -->
     <section id="contact" class="container">
         <h2>联系方式</h2>
-        <div class="contact-info">
-            <p>手机号：13072660129</p>
-            <p>邮箱：2667270650@qq.com</p>
+        <div class="contact-detail">
+            <p>📱 <strong>手机</strong>：13072660129</p>
+            <p>📧 <strong>邮箱</strong>：2667270650@qq.com</p>
         </div>
-        <div class="btn-group">
-            <a href="#" class="btn">[ 下载个人简历PDF ] 👉</a>
-        </div>
-        <div class="qr-code">
-            <span>简历二维码占位符</span>
+        <div style="margin-top: 2rem; padding: 2rem; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 15px;">
+            <h3 style="color: #2c3e50; margin-bottom: 1rem;">💡 AI产品思考</h3>
+            <div style="text-align: left;">
+                <p style="margin-bottom: 1rem; color: #34495e; line-height: 1.8;">
+                    <strong>✅ 大模型产品落地核心是降本提效</strong>：自动化评测比人工提效30%+（结合字节实习经验）
+                </p>
+                <p style="margin-bottom: 1rem; color: #34495e; line-height: 1.8;">
+                    <strong>✅ AI数据产品的基础是高质量数据</strong>：数据清洗是产品优化前提（结合美的VOC项目经验）
+                </p>
+                <p style="color: #34495e; line-height: 1.8;">
+                    <strong>✅ 大模型垂直落地需融合领域知识+Prompt工程</strong>：小样本提效关键（结合硕士RAG项目经验）
+                </p>
+            </div>
         </div>
     </section>
 
-    <!-- 页脚 -->
     <footer>
-        <p>©2026 吕怡晗 | AI产品经理个人品牌门户</p>
-        <p>本网站由vibecoding AI辅助构建（迭代版）</p>
+        <p>© 2026 吕怡晗 | AI产品经理个人品牌门户</p>
+        <p>本网站由 AI 辅助构建（迭代版）</p>
     </footer>
 
     <script>
-        // 折叠面板功能
-        const accordionHeaders = document.querySelectorAll('.accordion-header');
-        accordionHeaders.forEach(header => {
-            header.addEventListener('click', () => {
-                const content = header.nextElementSibling;
-                content.classList.toggle('active');
-                // 切换箭头方向
-                const arrow = header.querySelector('span:first-child');
-                if (content.classList.contains('active')) {
-                    arrow.innerHTML = arrow.innerHTML.replace('▶', '▼');
-                } else {
-                    arrow.innerHTML = arrow.innerHTML.replace('▼', '▶');
-                }
-            });
-        });
-
-        // 平滑滚动
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
