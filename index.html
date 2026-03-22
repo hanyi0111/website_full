@@ -1030,7 +1030,7 @@
 
         // API配置
         const API_CONFIG = {
-            baseUrl: 'https://website-full-theta.vercel.app/api'
+            baseUrl: 'https://website-full-theta.vercel.app'
         };
         
         // 确保使用正确的API地址
@@ -1048,8 +1048,9 @@
             // 调用后端API
             try {
                 console.log('Calling API with message:', message);
-                console.log('API URL:', `${API_CONFIG.baseUrl}/chat`);
-                const response = await fetch(`${API_CONFIG.baseUrl}/chat`, {
+                const apiUrl = `${API_CONFIG.baseUrl}/api/chat`;
+                console.log('API URL:', apiUrl);
+                const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
