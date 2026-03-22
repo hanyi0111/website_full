@@ -884,5 +884,182 @@
             });
         });
     </script>
+
+    <!-- AI对话助手 -->
+    <div id="ai-assistant-container" style="position: fixed; bottom: 30px; right: 30px; z-index: 1000;">
+        <!-- 悬浮按钮 -->
+        <div id="ai-assistant-button" style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4); transition: all 0.3s ease;">
+            <span style="color: white; font-size: 24px; font-weight: bold;">🤖</span>
+        </div>
+        
+        <!-- 聊天窗口 -->
+        <div id="ai-chat-window" style="display: none; width: 350px; height: 450px; background: white; border-radius: 15px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15); margin-top: 10px; overflow: hidden; flex-direction: column;">
+            <!-- 聊天头部 -->
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center;">
+                <h3 style="margin: 0; font-size: 16px; font-weight: 600;">AI对话助手</h3>
+                <button id="ai-close-button" style="background: none; border: none; color: white; font-size: 18px; cursor: pointer;">&times;</button>
+            </div>
+            
+            <!-- 聊天内容 -->
+            <div id="ai-chat-messages" style="flex: 1; padding: 15px; overflow-y: auto; background: #f8f9fa;">
+                <div style="display: flex; margin-bottom: 10px;">
+                    <div style="background: white; padding: 10px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); max-width: 80%;">
+                        <p style="margin: 0; color: #34495e;">你好！我是吕怡晗的AI助手，可以回答关于她的个人背景、项目经验和AI产品相关问题。请问有什么可以帮助你的？</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 输入区域 -->
+            <div style="padding: 15px; border-top: 1px solid #e9ecef; display: flex; gap: 10px;">
+                <input type="text" id="ai-input" placeholder="请输入你的问题..." style="flex: 1; padding: 10px; border: 1px solid #ced4da; border-radius: 20px; outline: none; font-size: 14px;">
+                <button id="ai-send-button" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease;">
+                    <span style="font-size: 16px;">➤</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // AI对话助手逻辑
+        const aiButton = document.getElementById('ai-assistant-button');
+        const chatWindow = document.getElementById('ai-chat-window');
+        const closeButton = document.getElementById('ai-close-button');
+        const chatMessages = document.getElementById('ai-chat-messages');
+        const aiInput = document.getElementById('ai-input');
+        const sendButton = document.getElementById('ai-send-button');
+
+        // 预设问答
+        const presetQA = {
+            '你好': '你好！我是吕怡晗的AI助手，有什么可以帮助你的？',
+            '吕怡晗是谁': '吕怡晗是一位AI产品经理，拥有管理科学与工程硕士学位，专注于大模型输出优化研究。她曾在字节跳动和美的集团实习，拥有丰富的AI产品开发经验。',
+            '她的教育背景': '吕怡晗毕业于桂林电子科技大学管理科学与工程专业（硕士），本科毕业于河南医药大学信息管理与信息系统专业。',
+            '她的实习经历': '吕怡晗曾在字节跳动担任AI数据技术实习生，参与豆包"超能模式"核心功能开发；在美的集团担任产品经理实习生，负责VOC分析项目。',
+            '她的项目经验': '吕怡晗主导了基于改进RAG的大模型药品说明书摘要生成研究，以及基于关键字的大屏动态文字实时检索系统（省级）项目。',
+            '她的技能': '吕怡晗掌握Python、SPSS、MATLAB等数据分析工具，熟悉Figma等原型设计工具，拥有英语CET-6、计算机二级等证书，擅长大模型迭代、Prompt工程、RAG技术等AI产品能力。',
+            '什么是Prompt工程': 'Prompt工程是设计和优化提示词，以引导大语言模型生成更准确、相关和有用的回答的过程。吕怡晗在字节跳动实习期间，通过设计SP策略，将模型生成的格式遵循度提升至95%。',
+            '什么是RAG技术': 'RAG（Retrieval-Augmented Generation）技术是一种结合检索和生成的方法，通过从外部知识库检索相关信息来增强大语言模型的生成能力。吕怡晗在她的硕士项目中使用RAG技术提升了大模型在医学文本摘要中的表现。',
+            '如何联系她': '你可以通过手机13072660129或邮箱2667270650@qq.com联系吕怡晗。'
+        };
+
+        // 打开聊天窗口
+        aiButton.addEventListener('click', () => {
+            chatWindow.style.display = 'flex';
+            aiButton.style.display = 'none';
+        });
+
+        // 关闭聊天窗口
+        closeButton.addEventListener('click', () => {
+            chatWindow.style.display = 'none';
+            aiButton.style.display = 'flex';
+        });
+
+        // 发送消息
+        async function sendMessage() {
+            const message = aiInput.value.trim();
+            if (message) {
+                // 添加用户消息
+                addMessage('user', message);
+                aiInput.value = '';
+
+                // 显示AI正在输入
+                const typingIndicator = document.createElement('div');
+                typingIndicator.id = 'typing-indicator';
+                typingIndicator.style.display = 'flex';
+                typingIndicator.style.justifyContent = 'flex-start';
+                typingIndicator.style.marginBottom = '10px';
+                typingIndicator.innerHTML = `
+                    <div style="background: white; padding: 10px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); max-width: 80%;">
+                        <p style="margin: 0; color: #34495e;">AI正在思考...</p>
+                    </div>
+                `;
+                chatMessages.appendChild(typingIndicator);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                // 调用AI回复
+                try {
+                    let response = await getResponse(message);
+                    // 移除输入指示器
+                    document.getElementById('typing-indicator').remove();
+                    addMessage('ai', response);
+                } catch (error) {
+                    console.error('Error getting response:', error);
+                    // 移除输入指示器
+                    if (document.getElementById('typing-indicator')) {
+                        document.getElementById('typing-indicator').remove();
+                    }
+                    addMessage('ai', '抱歉，我暂时无法回答这个问题。你可以尝试重新提问或直接联系吕怡晗。');
+                }
+            }
+        }
+
+        // 监听发送按钮点击
+        sendButton.addEventListener('click', sendMessage);
+
+        // 监听回车键
+        aiInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // 添加消息到聊天窗口
+        function addMessage(type, content) {
+            const messageDiv = document.createElement('div');
+            messageDiv.style.display = 'flex';
+            messageDiv.style.marginBottom = '10px';
+            
+            if (type === 'user') {
+                messageDiv.style.justifyContent = 'flex-end';
+                messageDiv.innerHTML = `
+                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 10px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); max-width: 80%;">
+                        <p style="margin: 0; color: white;">${content}</p>
+                    </div>
+                `;
+            } else {
+                messageDiv.style.justifyContent = 'flex-start';
+                messageDiv.innerHTML = `
+                    <div style="background: white; padding: 10px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); max-width: 80%;">
+                        <p style="margin: 0; color: #34495e;">${content}</p>
+                    </div>
+                `;
+            }
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // API配置
+        const API_CONFIG = {
+            baseUrl: 'http://localhost:5000/api'
+        };
+
+        // 获取AI回复
+        async function getResponse(message) {
+            // 检查预设问答
+            for (const [key, value] of Object.entries(presetQA)) {
+                if (message.includes(key)) {
+                    return value;
+                }
+            }
+            
+            // 调用后端API
+            try {
+                const response = await fetch(`${API_CONFIG.baseUrl}/chat`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message: message })
+                });
+                
+                const data = await response.json();
+                return data.response;
+            } catch (error) {
+                console.error('API call failed:', error);
+                // 如果API调用失败，使用默认回复
+                return '感谢你的问题！吕怡晗在AI产品领域有丰富经验，如果你有更具体的问题，我会尽力回答。你也可以通过联系方式直接与她沟通。';
+            }
+        }
+    </script>
 </body>
 </html>

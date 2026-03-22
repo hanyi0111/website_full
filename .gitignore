@@ -1,0 +1,21 @@
+# 忽略图片文件目录
+图片文件/
+
+# 忽略敏感文件
+私人令牌.txt
+
+# 忽略虚拟环境
+venv/
+env/
+
+# 忽略临时文件
+*.tmp
+*.temp
+
+# 忽略IDE文件
+.vscode/
+.idea/
+
+# 忽略系统文件
+Thumbs.db
+.DS_Store
