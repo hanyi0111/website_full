@@ -4,7 +4,7 @@ import openai
 import os
 
 app = Flask(__name__)
-CORS(app)  # 允许跨域请求
+CORS(app, resources={r"/api/*": {"origins": "*"}})  # 明确配置API路径的CORS，允许所有来源
 
 # 配置OpenAI API
 client = openai.OpenAI(
