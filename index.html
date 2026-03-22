@@ -1028,14 +1028,6 @@
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
-        // API配置
-        const API_CONFIG = {
-            baseUrl: 'https://website-full-theta.vercel.app'
-        };
-        
-        // 确保使用正确的API地址
-        console.log('API Base URL:', API_CONFIG.baseUrl);
-
         // 获取AI回复
         async function getResponse(message) {
             // 检查预设问答
@@ -1045,29 +1037,18 @@
                 }
             }
             
-            // 调用后端API
-            try {
-                console.log('Calling API with message:', message);
-                const apiUrl = `${API_CONFIG.baseUrl}/api/chat`;
-                console.log('API URL:', apiUrl);
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ message: message })
-                });
-                
-                console.log('API response status:', response.status);
-                console.log('API response headers:', response.headers);
-                const data = await response.json();
-                console.log('API response data:', data);
-                return data.response;
-            } catch (error) {
-                console.error('API call failed:', error);
-                // 如果API调用失败，使用默认回复
-                return '感谢你的问题！吕怡晗在AI产品领域有丰富经验，如果你有更具体的问题，我会尽力回答。你也可以通过联系方式直接与她沟通。';
-            }
+            // 增强的默认回复逻辑
+            const defaultResponses = [
+                '感谢你的问题！吕怡晗在AI产品领域有丰富经验，专注于大模型输出优化研究。',
+                '吕怡晗曾在字节跳动和美的集团实习，拥有丰富的AI产品开发经验。',
+                '如果你有关于AI产品、大模型应用或项目经验的问题，吕怡晗很乐意与你交流。',
+                '吕怡晗掌握Python、SPSS等数据分析工具，熟悉Figma等原型设计工具。',
+                '你可以通过手机13072660129或邮箱2667270650@qq.com联系吕怡晗。'
+            ];
+            
+            // 随机选择一个默认回复
+            const randomIndex = Math.floor(Math.random() * defaultResponses.length);
+            return defaultResponses[randomIndex];
         }
     </script>
 </body>
