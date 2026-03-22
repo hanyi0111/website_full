@@ -3,240 +3,437 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>吕怡晗 - 生活中的我</title>
+    <title>生活中的我 | My Life</title>
     <style>
+        /* 全局样式重置 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
         }
 
         body {
-            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
-            line-height: 1.8;
-            color: #2c3e50;
-            background: linear-gradient(135deg, #fff5f5 0%, #fff0e6 100%);
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
         }
 
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 3rem;
-            height: 70px;
-        }
-
-        nav .logo {
-            font-size: 1.6rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #ff6b6b 0%, #ffa502 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: #34495e;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: #ff6b6b;
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: linear-gradient(135deg, #ff6b6b 0%, #ffa502 100%);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
+        /* 容器 */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 20px;
         }
 
-        #hero {
-            margin-top: 120px;
+        /* 返回按钮样式 */
+        .back-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #e8f4f8;
+            color: #2d7d9a;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .back-btn:hover {
+            background-color: #2d7d9a;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* 顶部标题区 */
+        .header {
             text-align: center;
-            padding: 4rem 2rem;
+            padding: 60px 0 40px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 40px;
         }
 
-        #hero h1 {
-            font-size: 3rem;
-            background: linear-gradient(135deg, #ff6b6b 0%, #ffa502 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1rem;
+        .header h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
         }
 
-        #hero .subtitle {
-            font-size: 1.3rem;
+        .header p {
+            font-size: 1.1rem;
             color: #7f8c8d;
         }
 
-        section {
-            margin: 4rem auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.08);
-            padding: 3rem;
+        /* 标签云区域 */
+        .tags-section {
+            margin-bottom: 50px;
+            text-align: center;
         }
 
-        section h2 {
-            font-size: 2.2rem;
-            margin-bottom: 2.5rem;
-            color: #2c3e50;
+        .tags-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #34495e;
+        }
+
+        .tag-cloud {
             display: flex;
-            align-items: center;
-            font-weight: 700;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
         }
 
-        section h2::before {
-            content: '';
-            width: 8px;
-            height: 35px;
-            background: linear-gradient(135deg, #ff6b6b 0%, #ffa502 100%);
-            border-radius: 4px;
-            margin-right: 1rem;
-        }
-
-        .life-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .life-card {
-            background: linear-gradient(135deg, #fff5f5 0%, #fff9f0 100%);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 2px solid #ffe0e0;
+        .tag {
+            background-color: #e8f4f8;
+            color: #2d7d9a;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
         }
 
-        .life-card:hover {
-            transform: translateY(-5px);
-            border-color: #ff6b6b;
-            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.15);
-        }
-
-        .life-card h3 {
-            color: #ff6b6b;
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
-        }
-
-        .life-card p {
-            color: #34495e;
-            line-height: 1.8;
-        }
-
-        footer {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        .tag:hover {
+            background-color: #2d7d9a;
             color: white;
+            transform: translateY(-2px);
+        }
+
+        /* 时间线区域 */
+        .timeline-section {
+            margin-bottom: 60px;
+        }
+
+        .timeline-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #34495e;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* 时间线竖线 */
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: #e8f4f8;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+
+        /* 时间线条目 */
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        /* 左侧条目 */
+        .timeline-item.left {
+            left: 0;
+        }
+
+        /* 右侧条目 */
+        .timeline-item.right {
+            left: 50%;
+        }
+
+        /* 时间点圆点 */
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 4px solid #3498db;
+            border-radius: 50%;
+            top: 20px;
+            z-index: 1;
+        }
+
+        .timeline-item.left::after {
+            right: -10px;
+        }
+
+        .timeline-item.right::after {
+            left: -10px;
+        }
+
+        /* 卡片内容 */
+        .timeline-card {
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .timeline-date {
+            font-size: 0.85rem;
+            color: #95a5a6;
+            margin-bottom: 8px;
+        }
+
+        .timeline-content {
+            font-size: 1rem;
+            color: #2c3e50;
+        }
+
+        /* 喜欢的事物区域 */
+        .likes-section {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 60px;
+        }
+
+        .likes-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #34495e;
+            border-left: 4px solid #2ecc71;
+            padding-left: 15px;
+        }
+
+        .likes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .like-item {
+            padding: 15px;
+            background-color: #fef9e7;
+            border-radius: 6px;
+        }
+
+        .like-item h3 {
+            font-size: 1rem;
+            color: #d35400;
+            margin-bottom: 10px;
+        }
+
+        .like-item ul {
+            list-style: none;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .like-item li {
+            margin-bottom: 5px;
+        }
+
+        /* 结尾互动区 */
+        .footer-section {
             text-align: center;
-            padding: 2.5rem 0;
-            margin-top: 4rem;
+            padding: 40px 0 60px;
+            border-top: 1px solid #eee;
         }
 
-        footer p {
-            margin-bottom: 0.5rem;
-            opacity: 0.9;
+        .footer-section p {
+            font-size: 1.1rem;
+            color: #34495e;
         }
 
-        @media (max-width: 968px) {
-            nav {
-                flex-direction: column;
-                padding: 1rem;
-                height: auto;
+        /* 响应式适配 */
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
             }
 
-            nav ul {
-                margin-top: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 1rem;
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
             }
 
-            .life-grid {
+            .timeline-item.right {
+                left: 0;
+            }
+
+            .timeline-item.left::after,
+            .timeline-item.right::after {
+                left: 21px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .likes-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="logo">生活中的我</div>
-        <ul>
-            <li><a href="index.html">← 返回主页</a></li>
-        </ul>
-    </nav>
+    <!-- 顶部标题区 -->
+    <div class="container">
+        <!-- 返回按钮 -->
+        <button class="back-btn" onclick="goBack()">← 返回上一页</button>
+        
+        <div class="header">
+            <h1>生活中的我</h1>
+            <p>在代码与山川之间，认真记录每一个平凡又闪光的日子</p>
+        </div>
 
-    <section id="hero" class="container">
-        <h1>🌟 生活中的我</h1>
-        <p class="subtitle">工作之外，我也有丰富的生活～</p>
-    </section>
-
-    <section class="container">
-        <h2>我的兴趣爱好</h2>
-        <div class="life-grid">
-            <div class="life-card">
-                <h3>📚 阅读</h3>
-                <p>喜欢读产品思维、AI技术相关的书籍，也喜欢看小说放松心情。</p>
-            </div>
-            <div class="life-card">
-                <h3>🏃 运动</h3>
-                <p>坚持跑步、瑜伽，保持健康的身体和积极的心态。</p>
-            </div>
-            <div class="life-card">
-                <h3>🎨 创意</h3>
-                <p>喜欢用AI工具做创意设计，探索艺术与技术的结合。</p>
+        <!-- 标签云区域 -->
+        <div class="tags-section">
+            <h2>我的生活侧写</h2>
+            <div class="tag-cloud">
+                <span class="tag">🏔️ 户外徒步</span>
+                <span class="tag">🌊 城市看海</span>
+                <span class="tag">🚶 Citywalk</span>
+                <span class="tag">🍜 美食探索</span>
+                <span class="tag">🎧 音乐与剧</span>
+                <span class="tag">💼 职场成长</span>
+                <span class="tag">👩‍❤️‍👩 珍视联结</span>
             </div>
         </div>
-    </section>
 
-    <section class="container">
-        <h2>生活态度</h2>
-        <div style="text-align: center; padding: 2rem;">
-            <p style="font-size: 1.3rem; line-height: 2; color: #34495e;">
-                认真工作，用心生活<br>
-                保持好奇，持续成长<br>
-                做一个温暖而有力量的人 ✨
-            </p>
+        <!-- 时间线生活碎片 -->
+        <div class="timeline-section">
+            <h2>生活碎片</h2>
+            <div class="timeline">
+                <!-- 2026年条目 -->
+                <div class="timeline-item left">
+                    <div class="timeline-card">
+                        <div class="timeline-date">2026.03 | 杭州</div>
+                        <div class="timeline-content">西湖醋鱼 ✨ 来杭州的目的已经达到了哈哈哈</div>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-card">
+                        <div class="timeline-date">2026.02 | 平顶山</div>
+                        <div class="timeline-content">又来爬山 🧗‍♀️ 中原大佛</div>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-card">
+                        <div class="timeline-date">2026.02 | 日常</div>
+                        <div class="timeline-content">爱的人都在身边 ❤️</div>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-card">
+                        <div class="timeline-date">2026.02 | 惠州</div>
+                        <div class="timeline-content">连续两周单休，第二周周末爬山</div>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-card">
+                        <div class="timeline-date">2026.02 | 告别</div>
+                        <div class="timeline-content">所有人 有缘再见啦～</div>
+                    </div>
+                </div>
+
+                <!-- 2025年条目 -->
+                <div class="timeline-item left">
+                    <div class="timeline-card">
+                        <div class="timeline-date">2025.01 | 汕尾</div>
+                        <div class="timeline-content">去每个城市看海 🌊 看每个城市的海</div>
+                        <img src="个人照片2.jpg" style="width:100%;border-radius:4px;margin-top:10px;">
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-card">
+                        <div class="timeline-date">2025.01 | 惠州</div>
+                        <div class="timeline-content">惠州 citywalk 🚶</div>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-card">
+                        <div class="timeline-date">2025.01 | 音乐</div>
+                        <div class="timeline-content">Apple Music 上成毅的《行路天涯》</div>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-card">
+                        <div class="timeline-date">2025.04 | 衡阳</div>
+                        <div class="timeline-content">南岳衡山 全程徒步6小时拿下</div>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-card">
+                        <div class="timeline-date">2025.03 | 上海</div>
+                        <div class="timeline-content">樱花树下站谁都美 🌸</div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
 
-    <footer>
-        <p>© 2026 吕怡晗 | 生活中的我</p>
-        <p>本网站由 AI 辅助构建（迭代版）</p>
-    </footer>
+        <!-- 我喜欢的事物 -->
+        <div class="likes-section">
+            <h2>我喜欢的 things</h2>
+            <div class="likes-grid">
+                <div class="like-item">
+                    <h3>喜欢的场景</h3>
+                    <ul>
+                        <li>海边日落</li>
+                        <li>山间徒步</li>
+                        <li>秋日湖畔</li>
+                        <li>校园桂花香</li>
+                    </ul>
+                </div>
+                <div class="like-item">
+                    <h3>喜欢的状态</h3>
+                    <ul>
+                        <li>平静</li>
+                        <li>同频</li>
+                        <li>简单快乐</li>
+                    </ul>
+                </div>
+                <div class="like-item">
+                    <h3>喜欢的小事</h3>
+                    <ul>
+                        <li>和家人朋友吃饭</li>
+                        <li>听喜欢的歌</li>
+                        <li>Citywalk</li>
+                    </ul>
+                </div>
+                <div class="like-item">
+                    <h3>生活信条</h3>
+                    <ul>
+                        <li>把节奏放慢，日子就会有温柔的答案</li>
+                        <li>同频比天上的星星都难得</li>
+                        <li>想成为工作中独当一面的大人</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 结尾互动区 -->
+        <div class="footer-section">
+            <p>如果你也喜欢这样的生活，或者想聊聊旅行、美食、职场成长，欢迎来找我聊天～</p>
+        </div>
+    </div>
+
+    <script>
+        // 返回上一页函数
+        function goBack() {
+            window.history.back();
+        }
+        
+        // 可选：如果需要添加图片，可在timeline-card里添加img标签
+        // 示例：<img src="your-image.jpg" alt="杭州西湖" style="width:100%;border-radius:4px;margin-top:10px;">
+    </script>
 </body>
 </html>
