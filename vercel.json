@@ -12,6 +12,14 @@
     {
       "src": "*.pdf",
       "use": "@vercel/static"
+    },
+    {
+      "src": "图片文件/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.jpg",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
@@ -20,8 +28,12 @@
       "dest": "server.py"
     },
     {
-      "src": "/(.*\\.html|\\.pdf)",
+      "src": "/(.*\\.html|\\.pdf|\\.jpg)",
       "dest": "/$1"
+    },
+    {
+      "src": "/图片文件/(.*)",
+      "dest": "/图片文件/$1"
     },
     {
       "src": "/",
